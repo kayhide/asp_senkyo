@@ -19,7 +19,9 @@ open(@dst, 'w') do |io|
     io << "## #{key}\n"
     vals.uniq.map do |val|
       [vals.count(val), val]
-    end.sort_by(&:first).reverse.each do |count, val|
+    end.sort_by do |count, val|
+      [-count, val]
+    end.each do |count, val|
       io << "#{count} #{val}  \n"
     end
     io << "\n"
